@@ -47,7 +47,9 @@ public struct WKNetworkDispatcher {
                     throw httpError(response.statusCode, body )
                 }
                 // print("response response: \(response)")
-                print("response data: \(data)")
+
+                let body = String(data: data, encoding: String.Encoding.utf8) ?? ""
+                print("Response Body: \(body)")
                 return data
             })
             .decode(type: ReturnType.self, decoder: JSONDecoder())
