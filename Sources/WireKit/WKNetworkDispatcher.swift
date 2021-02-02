@@ -47,7 +47,7 @@ public struct WKNetworkDispatcher {
                     throw httpError(response.statusCode, body )
                 }
                 // print("response response: \(response)")
-                // print("response data: \(data)")
+                print("response data: \(data)")
                 return data
             })
             .decode(type: ReturnType.self, decoder: JSONDecoder())
