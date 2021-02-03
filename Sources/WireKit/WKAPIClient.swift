@@ -12,9 +12,11 @@ import Combine
 public struct WKAPIClient {
     
     public var baseURL: String!
+    public var defaultHeaders: WKHTTPHeaders?
     public var networkDispatcher: WKNetworkDispatcher!
     
     public init(baseURL: String,
+                defaultHeaders: WKHTTPHeaders? = nil,
                 networkDispatcher: WKNetworkDispatcher = WKNetworkDispatcher()) {
         self.baseURL = baseURL
         self.networkDispatcher = networkDispatcher
@@ -24,7 +26,7 @@ public struct WKAPIClient {
     /// - Parameter request: WKRequest to Dispatch
     /// - Returns: A publisher containing decoded data or an error
     public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, WKNetworkRequestError> {
-        guard let urlRequest = request.asURLRequest(baseURL: baseURL) else {
+        guard let urlRequest = request.asURLRequest(baseURL: baseURL, defaultHeaders: defaultHeaders) else {
             return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest("")).eraseToAnyPublisher()
             
         }

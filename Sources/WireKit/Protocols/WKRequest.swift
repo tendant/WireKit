@@ -79,7 +79,7 @@ extension WKRequest {
     /// Transforms an WKRequest into a standard URL request
     /// - Parameter baseURL: API Base URL to be used
     /// - Returns: A ready to use URLRequest
-    func asURLRequest(baseURL: String) -> URLRequest? {
+    func asURLRequest(baseURL: String, defaultHeaders: WKHTTPHeaders? = nil) -> URLRequest? {
         guard var urlComponents = URLComponents(string: baseURL) else { return nil }
         urlComponents.path = "\(urlComponents.path)\(path)"
         urlComponents.queryItems = queryItemsFrom(params: queryParams)
@@ -87,7 +87,7 @@ extension WKRequest {
         var request = URLRequest(url: finalURL)
         request.httpMethod = method.rawValue
         request.httpBody = requestBodyFrom(params: body)
-        let defaultHeaders: WKHTTPHeaders = [
+        let defaultHeaders: WKHTTPHeaders = defaultHeaders ?? [
             WKHTTPHeaderField.contentType.rawValue: contentType.rawValue,
             WKHTTPHeaderField.acceptType.rawValue: contentType.rawValue
         ]
