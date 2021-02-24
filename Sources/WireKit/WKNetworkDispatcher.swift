@@ -52,7 +52,8 @@ public struct WKNetworkDispatcher {
                 print("Response Body: \(body)")
                 return data
             })
-            .decode(type: ReturnType.self, decoder: JSONDecoder())
+            // Not decode response, leave it to client to decide
+            // .decode(type: ReturnType.self, decoder: JSONDecoder())
             .mapError { error in
                handleError(error, "")
             }
