@@ -34,7 +34,7 @@ public struct WKNetworkDispatcher {
     /// Dispatches an URLRequest and returns a publisher
     /// - Parameter request: URLRequest
     /// - Returns: A publisher with the provided decoded data or an error
-    public func dispatch<ReturnType: Codable>(request: URLRequest) -> AnyPublisher<Data, WKNetworkRequestError> {
+    public func dispatch(request: URLRequest) -> AnyPublisher<Data, WKNetworkRequestError> {
         
         return urlSession
             .dataTaskPublisher(for: request)

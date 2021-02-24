@@ -25,12 +25,12 @@ public struct WKAPIClient {
     /// Dispatches an WKRequest and returns a publisher
     /// - Parameter request: WKRequest to Dispatch
     /// - Returns: A publisher containing decoded data or an error
-    public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Request.ReturnType, WKNetworkRequestError> {
+    public func dispatch<Request: WKRequest>(_ request: Request) -> AnyPublisher<Data, WKNetworkRequestError> {
         guard let urlRequest = request.asURLRequest(baseURL: baseURL, defaultHeaders: defaultHeaders) else {
-            return Fail(outputType: Request.ReturnType.self, failure: WKNetworkRequestError.badRequest("")).eraseToAnyPublisher()
+            return Fail(outputType: Data.self, failure: WKNetworkRequestError.badRequest("")).eraseToAnyPublisher()
             
         }
-        typealias RequestPublisher = AnyPublisher<Request.ReturnType, WKNetworkRequestError>
+        typealias RequestPublisher = AnyPublisher<Data, WKNetworkRequestError>
         let requestPublisher: RequestPublisher = networkDispatcher.dispatch(request: urlRequest)
         return requestPublisher.eraseToAnyPublisher()
     }
