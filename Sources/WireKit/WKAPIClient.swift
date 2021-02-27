@@ -19,6 +19,7 @@ public struct WKAPIClient {
                 defaultHeaders: WKHTTPHeaders? = nil,
                 networkDispatcher: WKNetworkDispatcher = WKNetworkDispatcher()) {
         self.baseURL = baseURL
+        self.defaultHeaders = defaultHeaders
         self.networkDispatcher = networkDispatcher
     }
     
