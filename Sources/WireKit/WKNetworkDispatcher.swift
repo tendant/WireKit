@@ -49,7 +49,7 @@ public struct WKNetworkDispatcher {
                 // print("response response: \(response)")
 
                 let body = String(data: data, encoding: String.Encoding.utf8) ?? ""
-                print("Response Body: \(body)")
+                // print("Response Body: \(body)")
                 return data
             })
             // Not decode response, leave it to client to decide
